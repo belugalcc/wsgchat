@@ -1,4 +1,4 @@
-name = "meshcall"
+name = "wsgchat"
 main = "src/worker.js"
 compatibility_date = "2024-11-01"
 
@@ -12,13 +12,14 @@ binding = "ASSETS"
 name = "ROOMS"
 class_name = "ChatRoom"
 
+# Free plan Durable Objects must use SQLite-backed storage, which needs the
+# new_sqlite_classes migration key (new_classes is for the paid/legacy
+# key-value backend and is what threw the 10097 error).
 [[migrations]]
 tag = "v1"
-new_classes = ["ChatRoom"]
+new_sqlite_classes = ["ChatRoom"]
 
 # Chat history storage.
-# Get your real ID from: Cloudflare dashboard -> Workers & Pages -> KV -> CHAT_KV
-# or by running: npx wrangler kv namespace list
 [[kv_namespaces]]
 binding = "CHAT_KV"
 id = "99de195282764157bc9ed47536154911"
